@@ -60,9 +60,9 @@ class game
 public function  winnumber()
     
 {
-    $winnumber = array(1,2,3,4,5,6,7,8,9,0);
-    $winnumber = array_rand($winnumber, 1);
-    $winnumber = array_slice($winnumber,0, 5);
+    
+    $winnumber = [1,2,3,4,5];
+    $winnumber = implode(',', $winnumber);
     
     return $winnumber;
 
@@ -73,7 +73,7 @@ public function  winnumber()
 public function  sendwinnumber()
 {
     $winnumber = $this->winnumber();
-    $winnumber = implode(',', $winnumber);
+    // $winnumber = implode(',', $winnumber);
     $dateadded =date('jS F, Y');
     $timeadded = date('h:i:s A');
     $query = mysqli_query($this->db,"INSERT INTO win(number,dateadded,timeadded) VALUES ('$winnumber','$dateadded','$timeadded')");
@@ -95,7 +95,7 @@ public function  comparewin()
 {
 
     $this->sendwinnumber();
-    session_start(); 
+    // session_start(); 
     if(isset($_SESSION['token'])){
         $token = $_SESSION['token'];
         $winnumber = $_SESSION['winnumber'];

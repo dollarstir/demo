@@ -29,16 +29,40 @@ $(function(){
 
 // function for ajax responses
     function response(resp){
+        resp  = $.trim(resp);
 
         if(resp == 'success'){
             $('.mess').html('<div class="alert cc alert-success" role="alert">Bet placed successfuly</div>');
+            $('.mess').fadeOut(5000);
         }
         else if(resp == 'won'){
-            $('.results').html(response);
             $('.res').fadeIn('slow');
+            $('.results').html('You won');
+            $('.win').load('process.php?action=winnumber');
+
+            $('.countdown').html(20);
 
 
             
+        }
+        else if(resp == 'lost'){
+            $('.res').fadeIn('slow');
+            $('.results').html('You lost');
+             $('.win').load('process.php?action=winnumber');
+             $('.countdown').html(20);
+            
+        }
+        else if(resp == 'nobet'){
+            $('.res').fadeIn('slow');
+            $('.results').html('No bet placed');
+            $('.win').load('process.php?action=winnumber');
+            $('.countdown').html(20);
+        }
+        else if(resp == 'error'){
+            $('.mess').html('<div class="alert cc alert-danger" role="alert">Error placing bet</div>');
+        }
+        else{
+            $('.mess').html('<div class="alert cc alert-danger" role="alert">Error placing bet</div>');
         }
 
     }
@@ -116,7 +140,7 @@ $(function(){
             $dd = {
                 url:'process.php?action=result',
                 type:'post',
-                success:responses,
+                success:response,
             }
             $.ajax($dd);
             

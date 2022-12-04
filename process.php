@@ -19,6 +19,12 @@ if (isset($_GET['action'])) {
 
             echo $game->comparewin();
             break;
+
+        case 'winnumber':
+            $game = new game();
+
+            echo $game->winnumber();
+            break;
         
         default:
             # code...
