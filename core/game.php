@@ -44,7 +44,7 @@ class game
         if($query){
             session_start();
             $_SESSION['token'] = $token;
-            $msg = 'Bet Placed Successfully';
+            $msg = 'success';
         }
         else{
             $msg = 'Error Placing Bet';

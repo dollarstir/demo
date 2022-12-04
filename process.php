@@ -6,6 +6,6 @@ if (isset($_GET['action'])) {
     if ($_GET['action'] == 'bet') {
         $game = new game();
         extract($_POST);
-        $game->bet($data);
+        echo $game->bet($data);
     }
 }

@@ -26,6 +26,16 @@ $(function(){
 
     }); 
 
+
+// function for ajax responses
+    function response(resp){
+
+        if(resp == 'success'){
+            $('.mess').html('<div class="alert cc alert-success" role="alert">Bet placed successfuly</div>');
+        }
+
+    }
+
 // Bet buttons here
     $('.bet').click( function(){
 
@@ -51,8 +61,17 @@ $(function(){
         else {
 
             if(confirm('Are you sure you want to bet?')){
+                $myrecord  ={
+                    url :'process.php?action=bet',
+                    type:'post',
+                    data:{'data':data},
+                    success: response,
+    
+                }
+    
+                $.ajax($myrecord);
                 
-            $('.mess').html('<div class="alert cc alert-success" role="alert">You have betted on '+ data + ' Please wait for result</div>');
+            
 
             }
 
@@ -68,9 +87,6 @@ $(function(){
           var count = parseInt($(this).html());
           if (count !== 0) {
             $(this).html(count - 1);
-
-
-
             
           }
           else{
@@ -78,17 +94,7 @@ $(function(){
             $(this).css('background-color', 'red');
             $(this).css('color', '#fff');
 
-            $myrecord  ={
-                url :'process.php?action=bet',
-                type:'post',
-                data:{'data':data},
-                success:function(response){
-                    alert(response);
-                }
-
-            }
-
-            $.ajax($myrecord);
+            
 
           }
         });
