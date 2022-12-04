@@ -51,12 +51,5 @@ class game
         }
 
         return $msg;
-
-
-        
-
-
-
-
     }
 }
