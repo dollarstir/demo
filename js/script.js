@@ -1,4 +1,9 @@
 $(function(){
+
+    $('.res').hide();
+
+
+    // game functions here
     var data = [];
     $('.demo').click( function(){
         var $id = $(this).attr('id');
@@ -21,7 +26,7 @@ $(function(){
 
     }); 
 
-
+// Bet buttons here
     $('.bet').click( function(){
 
         if(data.length == 0){
@@ -54,6 +59,41 @@ $(function(){
         }
 
     })
+
+
+
+//  Time functions here
+    var doUpdate = function() {
+        $('.countdown').each(function() {
+          var count = parseInt($(this).html());
+          if (count !== 0) {
+            $(this).html(count - 1);
+
+
+
+            
+          }
+          else{
+            $(this).html('0');
+            $(this).css('background-color', 'red');
+            $(this).css('color', '#fff');
+
+            $myrecord  ={
+                url :'process.php?action=bet',
+                type:'post',
+                data:{'data':data},
+                success:function(response){
+                    console.log(response);
+                }
+
+            }
+
+          }
+        });
+      };
+
+    setInterval(doUpdate, 1000);
+    
 
 
 

@@ -18,14 +18,18 @@ require 'autoloader/loader.php';
     
 
 
-<div class="container" style="margin-top:400px !important;">
+<div class="container" style="margin-top:70px !important;">
 <div class="row">
     <div class="col-md-8">
     <h1>Demo Game</h1>
     </div>
 
     <div class="col-md-4">
-    <h1>clock</h1>
+    <button class="btn btn-info countdown">15</button>
+    <span class="res">
+    <button class="btn btn-success results"></button>
+</span>
+
     </div>
 </div>
 
