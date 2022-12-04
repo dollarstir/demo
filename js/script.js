@@ -83,10 +83,12 @@ $(function(){
                 type:'post',
                 data:{'data':data},
                 success:function(response){
-                    console.log(response);
+                    alert(response);
                 }
 
             }
+
+            $.ajax($myrecord);
 
           }
         });
