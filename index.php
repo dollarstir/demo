@@ -18,8 +18,16 @@ require 'autoloader/loader.php';
     
 
 
-<div class="container">
-<h1>Demo Game</h1>
+<div class="container" style="margin-top:400px !important;">
+<div class="row">
+    <div class="col-md-8">
+    <h1>Demo Game</h1>
+    </div>
+
+    <div class="col-md-4">
+    <h1>clock</h1>
+    </div>
+</div>
 
 <div class="card w-80">
   <div class="card-body">

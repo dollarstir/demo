@@ -47,7 +47,7 @@ $(function(){
 
             if(confirm('Are you sure you want to bet?')){
                 
-            $('.mess').html('<div class="alert cc alert-success" role="alert">You have betted on '+ data + '</div>');
+            $('.mess').html('<div class="alert cc alert-success" role="alert">You have betted on '+ data + ' Please wait for result</div>');
 
             }
 
