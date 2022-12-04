@@ -94,6 +94,7 @@ $(function(){
             $(this).css('background-color', 'red');
             $(this).css('color', '#fff');
 
+
             
 
           }
@@ -101,6 +102,19 @@ $(function(){
       };
 
     setInterval(doUpdate, 1000);
+
+    setInterval(function(){
+        if($('.countdown').html() == '0'){
+
+            $dd = {
+                url:'process.php?action=genertanum',
+                type:'post',
+                success:responses,
+            }
+            $.ajax($dd);
+            
+        }
+    },3000);
     
 
 
