@@ -33,6 +33,13 @@ $(function(){
         if(resp == 'success'){
             $('.mess').html('<div class="alert cc alert-success" role="alert">Bet placed successfuly</div>');
         }
+        else if(resp == 'won'){
+            $('.results').html(response);
+            $('.res').fadeIn('slow');
+
+
+            
+        }
 
     }
 
@@ -107,7 +114,7 @@ $(function(){
         if($('.countdown').html() == '0'){
 
             $dd = {
-                url:'process.php?action=genertanum',
+                url:'process.php?action=result',
                 type:'post',
                 success:responses,
             }

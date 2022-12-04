@@ -93,6 +93,8 @@ public function  sendwinnumber()
 
 public function  comparewin()
 {
+
+    $this->sendwinnumber();
     session_start(); 
     if(isset($_SESSION['token'])){
         $token = $_SESSION['token'];
