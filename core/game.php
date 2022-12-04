@@ -103,7 +103,16 @@ public function  comparewin()
     $winnumber = explode(',', $winnumber);
     $result = array_intersect($number, $winnumber);
     $result = count($result);
-    
+    if($result == 5){
+        $status = 'won';
+    }
+    else{
+        $status = 'lost';
+    }
+
+
+    return $status;
+
 
 
 }
