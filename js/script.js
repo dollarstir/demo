@@ -27,18 +27,18 @@ $(function(){
         if(data.length == 0){
 
             $('.mess').html('<div class="alert cc alert-danger" role="alert">Please select a number</div>');
-            $('.cc').fadout(3000);
+            $(".cc").fadeOut(5000);
         }
 
         else if(data.length > 5){
 
             $('.mess').html('<div class="alert cc alert-danger" role="alert">Please select  5 numbers</div>');
-            $('.cc').fadout(3000);
+            $(".cc").fadeOut(5000);
         }
         else if(data.length < 5){
             
             $('.mess').html('<div class="alert cc alert-danger" role="alert">Please select  5 numbers</div>');
-            $('.cc').fadout(3000);
+            $(".cc").fadeOut(5000);
 
             
             
