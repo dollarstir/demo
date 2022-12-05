@@ -1,6 +1,6 @@
 $(function(){
 
-    $('.res').hide();
+    // $('.res').hide();
 
 
     // game functions here
@@ -122,8 +122,8 @@ $(function(){
           }
           else{
             $(this).html('0');
-            $(this).css('background-color', 'red');
-            $(this).css('color', '#fff');
+            // $(this).css('background-color', 'red');
+            // $(this).css('color', '#fff');
 
 
             

@@ -5,9 +5,8 @@ class game
     public $db;
     public $dbname = 'demo';
     public $dbhost = 'localhost';
-    public $dbpassword ='';
+    public $dbpassword = '';
     public $dbuser = 'root';
-
 
     public function __construct()
     {
@@ -24,105 +23,98 @@ class game
 
         return $data;
     }
-    
+
     public function generateToken()
     {
         $token = md5(uniqid(rand(), true));
+
         return $token;
     }
 
-
-
-    public function bet($data){
+    public function bet($data)
+    {
         $data = implode(',', $data);
-        $token  = $this->generateToken();
-        $dateadded =date('jS F, Y');
+        $token = $this->generateToken();
+        $dateadded = date('jS F, Y');
         $timeadded = date('h:i:s A');
 
-        $query = mysqli_query($this->db,"INSERT INTO bet(token,number,status,dateadded,timeadded) VALUES ('$token', '$data', 'pending','$dateadded','$timeadded')");
+        $query = mysqli_query($this->db, "INSERT INTO bet(token,number,status,dateadded,timeadded) VALUES ('$token', '$data', 'pending','$dateadded','$timeadded')");
 
-        if($query){
+        if ($query) {
             session_start();
             $_SESSION['token'] = $token;
             $msg = 'success';
-        }
-        else{
+        } else {
             $msg = 'Error Placing Bet';
         }
 
         return $msg;
     }
 
+    public function winnumber()
+    {
+        $winnumber = [];
 
-
-
-
-public function  winnumber()
-    
-{
-    
-    $winnumber = [1,2,3,4,5];
-    $winnumber = implode(',', $winnumber);
-    
-    return $winnumber;
-
-}
-
-
-
-public function  sendwinnumber()
-{
-    $winnumber = $this->winnumber();
-    // $winnumber = implode(',', $winnumber);
-    $dateadded =date('jS F, Y');
-    $timeadded = date('h:i:s A');
-    $query = mysqli_query($this->db,"INSERT INTO win(number,dateadded,timeadded) VALUES ('$winnumber','$dateadded','$timeadded')");
-    if($query){
-        // $msg = 'success';
-        session_start();
-        $_SESSION['winnumber'] = $winnumber;
-    }
-    else{
-        // $msg = 'Error ';
-    }
-
-    // return $msg;
-
-}
-
-
-public function  comparewin()
-{
-
-    $this->sendwinnumber();
-    // session_start(); 
-    if(isset($_SESSION['token'])){
-        $token = $_SESSION['token'];
-        $winnumber = $_SESSION['winnumber'];
-        $g = mysqli_query($this->db,"SELECT * FROM bet WHERE status = 'pending' AND token = '$token' ");
-        $g = mysqli_fetch_assoc($g);
-        $number = $g['number'];
-        $number = explode(',', $number);
-        $winnumber = explode(',', $winnumber);
-        $result = array_intersect($number, $winnumber);
-        $result = count($result);
-        if($result == 5){
-            $status = 'won';
+        for ($i = 0; $i < 5; ++$i) {
+            $gen = rand(0, 9);
+            array_push($winnumber, $gen);
         }
-        else{
-            $status = 'lost';
-        }
+
+        $winnumber = implode(',', $winnumber);
+
+        return $winnumber;
     }
-    else{
-        $status = 'nobet';
-    } 
-    
 
+    public function sendwinnumber()
+    {
+        $winnumber = $this->winnumber();
+        $wintoken = $this->generateToken();
+        // $winnumber = implode(',', $winnumber);
+        $dateadded = date('jS F, Y');
+        $timeadded = date('h:i:s A');
+        $query = mysqli_query($this->db, "INSERT INTO win(number,dateadded,timeadded,wintoken) VALUES ('$winnumber','$dateadded','$timeadded','$wintoken')");
+        if ($query) {
+            // $msg = 'success';
+            session_start();
+            $_SESSION['wintoken'] = $wintoken;
+        } else {
+            // $msg = 'Error ';
+        }
 
-    return $status;
+        // return $msg;
+    }
 
+    public function comparewin()
+    {
+        $this->sendwinnumber();
+        // session_start();
+        if (isset($_SESSION['token'])) {
+            $token = $_SESSION['token'];
+            $wintoken = $_SESSION['wintoken'];
+            $gt = mysqli_query($this->db, "SELECT * FROM win WHERE wintoken = '$wintoken'");
+            $gt = mysqli_fetch_assoc($gt);
+            $winnumber = $gt['number'];
 
+            $g = mysqli_query($this->db, "SELECT * FROM bet WHERE status = 'pending' AND token = '$token' ");
+            $g = mysqli_fetch_assoc($g);
+            $number = $g['number'];
+            $number = explode(',', $number);
+            $winnumber = explode(',', $winnumber);
+            $result = array_intersect($number, $winnumber);
+            $result = count($result);
+            if ($result == 5) {
+                $up = mysqli_query($this->db, "UPDATE bet SET status ='won' WHERE token ='$token'");
+                unset($_SESSION['token']);
+                $status = 'won';
+            } else {
+                $up = mysqli_query($this->db, "UPDATE bet SET status ='lost' WHERE token ='$token'");
+                unset($_SESSION['token']);
+                $status = 'lost';
+            }
+        } else {
+            $status = 'nobet';
+        }
 
-}
-
+        return $status;
+    }
 }

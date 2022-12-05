@@ -23,7 +23,14 @@ if (isset($_GET['action'])) {
         case 'winnumber':
             $game = new game();
 
-            echo $game->winnumber();
+            $num = $game->winnumber();
+            $num = explode(',', $num);
+            echo '<button class="demo1" id=""><span class="ballitem1">'.$num[0].'</span></button>
+            <button class="demo1" id=""><span class="ballitem1">'.$num[1].'</span></button>
+            <button class="demo1" id=""><span class="ballitem1">'.$num[2].'</span></button>
+            <button class="demo1" id=""><span class="ballitem1">'.$num[3].'</span></button>
+            <button class="demo1" id=""><span class="ballitem1">'.$num[4].'</span></button>
+            ';
             break;
         
         default:

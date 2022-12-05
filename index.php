@@ -20,20 +20,22 @@ require 'autoloader/loader.php';
 
 <div class="container" style="margin-top:70px !important;">
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-6">
     <h1>Demo Game</h1>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-6">
     <button class="btn btn-info countdown">20</button>
     <span class="res">
-    <button class="btn btn-success" style="background-color:black !important;"><span class="results">No bet Yet</span></button>
+    <button class="btn btn-success rtest" style="background-color:black !important;"><span class="results">No bet Yet</span></button>
 
-    <button class="btn btn-default win"></button>
+    
 </span>
+<button class="btn btn-default win"></button>
 
     </div>
 </div>
+<br><br><br>
 
 <div class="card w-80">
   <div class="card-body">
