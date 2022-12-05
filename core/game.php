@@ -72,15 +72,22 @@ class game
         // $winnumber = implode(',', $winnumber);
         $dateadded = date('jS F, Y');
         $timeadded = date('h:i:s A');
-        $query = mysqli_query($this->db, "INSERT INTO win(number,dateadded,timeadded,wintoken) VALUES ('$winnumber','$dateadded','$timeadded','$wintoken')");
-        if ($query) {
-            // $msg = 'success';
-            session_start();
-            $_SESSION['wintoken'] = $wintoken;
+        $next = date('h:i:s A', strtotime('+3 minutes'));
+        $ck = mysqli_query($this->db, 'SELECT * FROM winnumber ORDER BY id DESC LIMIT 1');
+        $ck = mysqli_fetch_assoc($ck);
+        $ck = $ck['nexttime'];
+        if ($ck > date('h:i:s A')) {
+            // $msg = 'Please wait for the next draw';
         } else {
-            // $msg = 'Error ';
+            $query = mysqli_query($this->db, "INSERT INTO win(number,dateadded,timeadded,nexttime,wintoken) VALUES ('$winnumber','$dateadded','$timeadded','$next','$wintoken')");
+            if ($query) {
+                // $msg = 'success';
+                session_start();
+                $_SESSION['wintoken'] = $wintoken;
+            } else {
+                // $msg = 'Error ';
+            }
         }
-
         // return $msg;
     }
 
@@ -90,8 +97,8 @@ class game
         // session_start();
         if (isset($_SESSION['token'])) {
             $token = $_SESSION['token'];
-            $wintoken = $_SESSION['wintoken'];
-            $gt = mysqli_query($this->db, "SELECT * FROM win WHERE wintoken = '$wintoken'");
+            // $wintoken = $_SESSION['wintoken'];
+            $gt = mysqli_query($this->db, 'SELECT * FROM win  ORDER BY id DESC LIMIT 1');
             $gt = mysqli_fetch_assoc($gt);
             $winnumber = $gt['number'];
 

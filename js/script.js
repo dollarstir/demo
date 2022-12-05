@@ -116,9 +116,10 @@ $(function(){
     var doUpdate = function() {
         $('.countdown').each(function() {
           var count = parseInt($(this).html());
+          var count1 = parseInt($('.countdown1').html());
           if (count !== 0) {
             if($(this).html() == 'waiting'){
-                $(this).html('waiting');
+                // $(this).html('waiting');
             }
             else{
                 $(this).html(count - 1);
@@ -127,31 +128,41 @@ $(function(){
           }
           else{
             $(this).html('0');
-            // $(this).css('background-color', 'red');
-            // $(this).css('color', '#fff');
-
-
             
+             
 
           }
+
+            if(count1 !== 0){
+                if($(this).html() == 'waiting'){
+                    // $('.countdown1').html('waiting');
+
+                    $('.countdown1').html(count1 - 1);
+
+                }
+                else{
+                    // $('.countdown1').html(0);
+
+                   
+                }
+                
+            }
+
+            
+            
+          
+
         });
 
+        if($('.countdown1').html() == '0'){
+            $('.countdown').html('20');
+            $('.countdown1').html('20');
+            
+        }
 
-        $('.countdown1').each(function() {
-            var count1 = parseInt($(this).html());
-            if (count1 !== 0) {
-                $(this).html(count1 - 1);
-              
-            }
-            else{
-              $(this).html('0');
-              
-  
-  
-              
-  
-            }
-          });
+
+
+        
       };
 
     setInterval(doUpdate, 1000);
@@ -167,9 +178,7 @@ $(function(){
             $.ajax($dd);
             
         }
-        if($('.countdown1').html() == '0'){
-            $('.countdown').html('30');
-        }
+        
     },3000);
     
 

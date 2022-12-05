@@ -98,7 +98,7 @@ border-bottom-left-radius: 5px;
 }
 .countdown1{
     visibility: hidden;
-    width:1px;
+    /* width:1px;
 }
 
 .rtest{
