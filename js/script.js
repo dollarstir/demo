@@ -40,7 +40,7 @@ $(function(){
             $('.results').html('You won');
             $('.win').load('process.php?action=winnumber');
 
-            $('.countdown').html(20);
+            $('.countdown').html('waiting');
 
 
             
@@ -49,14 +49,14 @@ $(function(){
             $('.res').fadeIn('slow');
             $('.results').html('You lost');
              $('.win').load('process.php?action=winnumber');
-             $('.countdown').html(20);
+             $('.countdown').html('waiting');
             
         }
         else if(resp == 'nobet'){
             $('.res').fadeIn('slow');
-            $('.results').html('No bet placed');
+            $('.results').html('No bet ');
             $('.win').load('process.php?action=winnumber');
-            $('.countdown').html(20);
+            $('.countdown').html('waiting');
         }
         else if(resp == 'error'){
             $('.mess').html('<div class="alert cc alert-danger" role="alert">Error placing bet</div>');
@@ -117,7 +117,12 @@ $(function(){
         $('.countdown').each(function() {
           var count = parseInt($(this).html());
           if (count !== 0) {
-            $(this).html(count - 1);
+            if($(this).html() == 'waiting'){
+                $(this).html('waiting');
+            }
+            else{
+                $(this).html(count - 1);
+            }
             
           }
           else{
@@ -130,6 +135,23 @@ $(function(){
 
           }
         });
+
+
+        $('.countdown1').each(function() {
+            var count1 = parseInt($(this).html());
+            if (count1 !== 0) {
+                $(this).html(count1 - 1);
+              
+            }
+            else{
+              $(this).html('0');
+              
+  
+  
+              
+  
+            }
+          });
       };
 
     setInterval(doUpdate, 1000);
@@ -144,6 +166,9 @@ $(function(){
             }
             $.ajax($dd);
             
+        }
+        if($('.countdown1').html() == '0'){
+            $('.countdown').html('30');
         }
     },3000);
     

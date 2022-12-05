@@ -25,9 +25,10 @@ require 'autoloader/loader.php';
     </div>
 
     <div class="col-md-6">
+    <button class="btn btn-info countdown1">60</button>
     <button class="btn btn-info countdown">20</button>
     <span class="res">
-    <button class="btn btn-success rtest" style="background-color:black !important;"><span class="results">No bet Yet</span></button>
+    <button class="btn btn-success rtest" style="background-color:black !important;"><span class="results">No bet</span></button>
 
     
 </span>

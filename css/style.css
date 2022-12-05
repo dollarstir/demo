@@ -61,7 +61,7 @@ body{
 } 
 
 .countdown{
-    width: 50px;
+    /* width: 50px; */
     height: 50px;
     /* max-width: 100%; */
     /* height: 100%; */
@@ -95,6 +95,10 @@ border-top-right-radius: 5px;
 border-bottom-right-radius: 5px;
 border-bottom-left-radius: 5px;
 
+}
+.countdown1{
+    visibility: hidden;
+    width:1px;
 }
 
 .rtest{
