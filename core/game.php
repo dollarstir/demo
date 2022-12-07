@@ -72,11 +72,14 @@ class game
         // $winnumber = implode(',', $winnumber);
         $dateadded = date('jS F, Y');
         $timeadded = date('h:i:s A');
-        $next = date('h:i:s A', strtotime('+3 minutes'));
-        $ck = mysqli_query($this->db, 'SELECT * FROM winnumber ORDER BY id DESC LIMIT 1');
-        $ck = mysqli_fetch_assoc($ck);
+        $next = date('h:i:s A', strtotime('+1 minutes'));
+        $ck = mysqli_query($this->db, 'SELECT * FROM win ORDER BY id DESC LIMIT 1');
+        $ck = mysqli_fetch_array($ck);
         $ck = $ck['nexttime'];
-        if ($ck > date('h:i:s A')) {
+
+        // echo $ck;
+
+        if ($ck > date('h:i:s A', strtotime('now'))) {
             // $msg = 'Please wait for the next draw';
         } else {
             $query = mysqli_query($this->db, "INSERT INTO win(number,dateadded,timeadded,nexttime,wintoken) VALUES ('$winnumber','$dateadded','$timeadded','$next','$wintoken')");

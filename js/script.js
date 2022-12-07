@@ -184,6 +184,6 @@ $(function(){
 
 
 
-    
+    $('.win').load('process.php?action=winnumber');
 
 })

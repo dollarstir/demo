@@ -1,7 +1,8 @@
 <?php
 
 require 'autoloader/loader.php';
-
+$gamefunc = new gamefunctions();
+echo $gamefunc->g120();
 ?>
 
 <!DOCTYPE html>
@@ -64,6 +65,7 @@ require 'autoloader/loader.php';
     </div>
   </div>
 </div>
+
 
 </div>
 
